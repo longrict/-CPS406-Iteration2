@@ -1,8 +1,6 @@
-bugreportapplication\bugReportform$3.class
-bugreportapplication\AccessDB.class
-bugreportapplication\bugReportform$1.class
-bugreportapplication\bugReport.class
-bugreportapplication\BugReportApplication.class
-bugreportapplication\bugReportform$2.class
-bugreportapplication\HomeScreen.class
-bugreportapplication\bugReportform.class
+bugreportapplication/Register.class
+bugreportapplication/Login$2.class
+bugreportapplication/Login$1.class
+bugreportapplication/Register$1.class
+bugreportapplication/Register$2.class
+bugreportapplication/Login.class
