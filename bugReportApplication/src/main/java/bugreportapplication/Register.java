@@ -180,6 +180,9 @@ public class Register extends javax.swing.JFrame {
             warningMessage.setText("ERROR: Username must be at least 6 characters and only alphanumeric characters.");
         } else if (!registerAuthorization.checkVerify(checkPass.getPassword(), verifyPass.getPassword())) {
             warningMessage.setText("ERROR: Passwords do not match.");
+        // If nothing is inputted for the email
+        } else if (checkEmail.getText().equals("")) {
+            warningMessage.setText("ERROR: Enter an email.");
         // Else, we query the database to check for potential errors
         } else {
             UserServiceIml query = new UserServiceIml();

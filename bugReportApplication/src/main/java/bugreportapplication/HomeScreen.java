@@ -35,12 +35,14 @@ public class HomeScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Bug Report System (BRS)");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon.png"))); // NOI18N
 
-        programDesc.setBackground(new java.awt.Color(242, 242, 242));
+        programDesc.setBackground(new java.awt.Color(204, 204, 204));
         programDesc.setColumns(20);
         programDesc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         programDesc.setLineWrap(true);
