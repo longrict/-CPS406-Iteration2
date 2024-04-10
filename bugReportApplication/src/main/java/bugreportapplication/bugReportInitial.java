@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package bugreportapplication;
+import com.mongodb.client.MongoCollection;
 
 /**
  *
@@ -188,6 +189,10 @@ public class bugReportInitial extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new bugReportInitial().setVisible(true);
+                
+                System.out.println("NOW RUNNING\n\n");
+                // manually add all bugs in the database
+                System.out.println(AccessDB.getReports());
             }
         });
     }

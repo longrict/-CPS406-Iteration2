@@ -32,6 +32,14 @@ public class BugReport {
     public enum PriorityEnum {
         High,Low,Medium
     }
+    
+    // Constructor
+    public BugReport(String title, String description, String priority, String status) {
+        this.title = title;
+        this.description = description;
+        this.priority = PriorityEnum.valueOf(priority);
+        this.status = status;
+    }
 
     @NonNull
     private String status;

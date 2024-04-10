@@ -145,7 +145,7 @@ public class Login extends javax.swing.JFrame {
             bugReportInitial rep = new bugReportInitial();
             rep.setVisible(true);
         } else {
-            warningMessage.setText("You have entered an incorrect passoword or username");
+            warningMessage.setText("You have entered an incorrect password or username");
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
