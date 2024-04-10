@@ -10,10 +10,8 @@ import java.awt.*;
 public class BugReportApplication {
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setSize(new Dimension(600, 400));
+        bugReportForm frame = new bugReportForm();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new bugReportform());
         frame.setVisible(true);
         
         

@@ -1,3 +1,12 @@
-bugreportapplication/authorization/loginAuthorization.class
-bugreportapplication/authorization/registerAuthorization.class
-bugreportapplication/Register$3.class
+bugreportapplication\model\User.class
+bugreportapplication\Service\UserService.class
+bugreportapplication\authorization\registerAuthorization.class
+bugreportapplication\model\BugReport.class
+bugreportapplication\bugReportForm$3.class
+bugreportapplication\model\BugReport$PriorityEnum.class
+bugreportapplication\DAO\DAOiml\UserMapperIml.class
+bugreportapplication\Register$3.class
+bugreportapplication\Service\ServiceIml\UserServiceIml.class
+bugreportapplication\DAO\UserMapper.class
+bugreportapplication\DTO\Result.class
+bugreportapplication\authorization\loginAuthorization.class
