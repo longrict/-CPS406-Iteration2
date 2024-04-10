@@ -1,5 +1,7 @@
 package bugreportapplication;
 import static com.mongodb.client.model.Filters.eq;
+
+import bugreportapplication.model.BugReport;
 import org.bson.Document;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -20,10 +22,12 @@ public class AccessDB {
         try(MongoClient mongoClient = connectToDB()){
             MongoDatabase database = mongoClient.getDatabase("BugReportApplication");
             MongoCollection<Document> collection = database.getCollection("BugReports");
-            
-            Document report = new Document("title",title).append("description",Description).append("priority",Priority);
+
+            Document report = new Document("title", title).append("description", Description)
+                    .append("priority", BugReport.PriorityEnum.valueOf(Priority))
+                    .append("status", "Not fixed");
+
             collection.insertOne(report);
-            mongoClient.close();
         }
     }
     

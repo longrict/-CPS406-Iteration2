@@ -2,7 +2,6 @@
 
 package bugreportapplication;
 import javax.swing.*;
-import bugreportapplication.bugReport;
 import java.awt.*;
 /**
  *
