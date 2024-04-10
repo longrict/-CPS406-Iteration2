@@ -1,11 +1,14 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package bugreportapplication;
 
 /**
  *
- * @author 
+ * @author David
  */
-public class HomeScreen extends javax.swing.JPanel {
+public class HomeScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form HomeScreen
@@ -23,19 +26,139 @@ public class HomeScreen extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        panel = new javax.swing.JPanel();
+        title = new javax.swing.JLabel();
+        logo = new javax.swing.JLabel();
+        scrollpanel1 = new javax.swing.JScrollPane();
+        programDesc = new javax.swing.JTextArea();
+        getStartedBtn = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        panel.setPreferredSize(new java.awt.Dimension(400, 500));
+
+        title.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        title.setText("Bug Report System (BRS)");
+
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon.png"))); // NOI18N
+
+        programDesc.setEditable(false);
+        programDesc.setColumns(20);
+        programDesc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        programDesc.setLineWrap(true);
+        programDesc.setRows(5);
+        programDesc.setText("The Bug Report System (BRS) intends to help the user keep track of bugs in their own programs. In order to get started, click the button below and login with with a valid username or password to get accessed to the bug report form.");
+        programDesc.setWrapStyleWord(true);
+        programDesc.setBorder(null);
+        scrollpanel1.setViewportView(programDesc);
+
+        getStartedBtn.setText("Get Started");
+        getStartedBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getStartedBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(logo)
+                        .addGap(18, 18, 18)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(scrollpanel1)
+                            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(getStartedBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(logo))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(title)))
+                .addGap(22, 22, 22)
+                .addComponent(scrollpanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(getStartedBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void getStartedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getStartedBtnActionPerformed
+        dispose();
+        Login frame = new Login();
+        frame.setVisible(true);
+    }//GEN-LAST:event_getStartedBtnActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                HomeScreen screen = new HomeScreen();
+                screen.setVisible(true);
+                screen.programDesc.setFocusable(false);
+                
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton getStartedBtn;
+    private javax.swing.JLabel logo;
+    private javax.swing.JPanel panel;
+    private javax.swing.JTextArea programDesc;
+    private javax.swing.JScrollPane scrollpanel1;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

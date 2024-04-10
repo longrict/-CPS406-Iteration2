@@ -115,6 +115,8 @@ public class bugReportForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
+        // Doesn't work (for me at least maybe) - commenting out temporary
+        /*
         // Get the text from the title text field
         String title = jTextField1.getText();
         
@@ -124,7 +126,15 @@ public class bugReportForm extends javax.swing.JFrame {
         // Get the text from the description text area
         String description = jTextArea1.getText();
         
+        // Add it to the database
         AccessDB.createReport(title, description, priority);
+        */
+        
+        
+        // Return to the initial bug report GUI
+        dispose();
+        bugReportInitial bugs = new bugReportInitial();
+        bugs.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
