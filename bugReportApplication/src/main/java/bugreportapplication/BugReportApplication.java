@@ -10,11 +10,8 @@ import java.awt.*;
 public class BugReportApplication {
 
     public static void main(String[] args) {
-        bugReportForm frame = new bugReportForm();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        // note: package default runs HomeScreen as default screen so removed code temporarily
         
-        
-        
+
     }
 }

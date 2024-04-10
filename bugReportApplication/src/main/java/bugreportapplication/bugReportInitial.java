@@ -152,7 +152,9 @@ public class bugReportInitial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
-
+        dispose();
+        bugReportForm frame = new bugReportForm();
+        frame.setVisible(true);
     }//GEN-LAST:event_createBtnActionPerformed
 
     /**
