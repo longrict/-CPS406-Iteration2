@@ -8,4 +8,12 @@ import lombok.Data;
 public class Result {
     private String msg;
     private Boolean success;
+    
+    public Boolean getResult() {
+        return success;
+    }
+    
+    public String getMsg() {
+        return msg;
+    }
 }

@@ -50,13 +50,15 @@ public class registerAuthorization {
     
     // Checks if a username is the correct length 6 characters and is alphanumeric
     public static boolean checkUserCorrectness(String user){
-        if (user.length() > 6){
+        if (user.length() >= 6){
             for (int i = 0; i < user.length(); i++){
                 if (!(Character.isAlphabetic(user.charAt(i)) || Character.isDigit(user.charAt(i)))){
                     return false;
                 }
             }
-        }
+        } else {
+            return false;
+        } 
         return true;
     }
     

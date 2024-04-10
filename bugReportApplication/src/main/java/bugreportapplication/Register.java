@@ -4,6 +4,8 @@
  */
 package bugreportapplication;
 import bugreportapplication.authorization.registerAuthorization;
+import bugreportapplication.DTO.Result;
+import bugreportapplication.Service.ServiceIml.UserServiceIml;
 
 /**
  *
@@ -41,6 +43,7 @@ public class Register extends javax.swing.JFrame {
         registerButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         moveLoginButton = new javax.swing.JButton();
+        warningMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,38 +78,44 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
+        warningMessage.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(49, 49, 49))
+                .addGap(147, 147, 147))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(registerButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(warningMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(46, 46, 46)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(checkPass, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(verifyPass, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(checkEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(checkUser, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(moveLoginButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel7)
+                                .addComponent(moveLoginButton)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(verifyPass, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(44, 44, 44)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(registerButton)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2)
+                                            .addComponent(checkEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                                            .addComponent(checkUser)
+                                            .addComponent(checkPass))))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(219, 219, 219)
+                                    .addComponent(jLabel6))))))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,10 +142,12 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(verifyPass, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(registerButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(moveLoginButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(warningMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(moveLoginButton)
                 .addContainerGap())
         );
 
@@ -161,10 +172,29 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_moveLoginButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        if (registerAuthorization.checkPassword(checkPass.getPassword())){
-            dispose();
-        }else if (registerAuthorization.checkUserCorrectness(checkUser.getText())){
-            dispose();
+        // If password is not valid 
+        if (!registerAuthorization.checkPassword(checkPass.getPassword())){
+            warningMessage.setText("ERROR: Password must be 8 characters or longer and contain a capital letter.");
+        // If username is less than 6 characters or contains non-alphanumeric characters  
+        } else if (!registerAuthorization.checkUserCorrectness(checkUser.getText())){
+            warningMessage.setText("ERROR: Username must be at least 6 characters and only alphanumeric characters.");
+        } else if (!registerAuthorization.checkVerify(checkPass.getPassword(), verifyPass.getPassword())) {
+            warningMessage.setText("ERROR: Passwords do not match.");
+        // Else, we query the database to check for potential errors
+        } else {
+            UserServiceIml query = new UserServiceIml();
+            Result results = query.register(checkUser.getText(), new String(checkPass.getPassword()), checkEmail.getText());
+            
+            // Displays message indicating of result
+            if (results.getSuccess()) {
+                // change color to green and then back to red (if more users later)
+                warningMessage.setForeground(new java.awt.Color(102,255,102));
+                warningMessage.setText(results.getMsg());
+                warningMessage.setForeground(new java.awt.Color(255, 51, 51));
+            // else, return error message
+            } else {
+                warningMessage.setText("ERROR: " + results.getMsg());
+            }
         }
     }//GEN-LAST:event_registerButtonActionPerformed
 
@@ -218,5 +248,6 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JButton moveLoginButton;
     private javax.swing.JButton registerButton;
     private javax.swing.JPasswordField verifyPass;
+    private javax.swing.JLabel warningMessage;
     // End of variables declaration//GEN-END:variables
 }
