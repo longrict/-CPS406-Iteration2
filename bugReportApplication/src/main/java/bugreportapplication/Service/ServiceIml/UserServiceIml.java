@@ -21,4 +21,10 @@ public class UserServiceIml implements UserService {
 
         return userMapper.addUser(userName, password, email);
     }
+
+    @Override
+    public Boolean delete(String userName) {
+        UserMapperIml userMapper = new UserMapperIml();
+        return userMapper.deleteUser(userName);
+    }
 }
