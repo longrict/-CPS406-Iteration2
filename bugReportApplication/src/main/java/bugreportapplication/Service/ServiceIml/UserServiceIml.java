@@ -1,6 +1,7 @@
 package bugreportapplication.Service.ServiceIml;
 
 import bugreportapplication.DAO.DAOiml.UserMapperIml;
+import bugreportapplication.DTO.Result;
 import bugreportapplication.Service.UserService;
 import bugreportapplication.model.User;
 
@@ -8,18 +9,20 @@ public class UserServiceIml implements UserService {
     @Override
     public Boolean login(String userName, String password) {
         UserMapperIml userMapper = new UserMapperIml();
-        User user = userMapper.findUser(userName);
+        User user = userMapper.findUserByName(userName);
         return user != null && password.equals(user.getPassword());
     }
 
     @Override
-    public Boolean register(String userName, String password, String email) {
+    public Result register(String userName, String password, String email) {
         UserMapperIml userMapper = new UserMapperIml();
-        User user = userMapper.findUser(userName);
 
-        if (user != null) return false;
+        //Authentication
+        if (userMapper.findUserByName(userName) != null) return new Result("Duplicate userName", false);
+        if (userMapper.findUserByEmail(email) != null) return new Result("Duplicate email", false);
 
-        return userMapper.addUser(userName, password, email);
+        userMapper.addUser(userName, password, email);
+        return new Result("Successfully registered", true);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package bugreportapplication.Service;
 
-import bugreportapplication.model.BugReport;
+import bugreportapplication.DTO.Result;
 
 /**
  * User Related Methods
@@ -8,7 +8,7 @@ import bugreportapplication.model.BugReport;
 public interface UserService {
     Boolean login(String userName, String password);
 
-    Boolean register(String userName, String password, String email);
+    Result register(String userName, String password, String email);
 
     Boolean delete(String userName);
 }

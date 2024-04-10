@@ -13,10 +13,20 @@ public class UserMapperIml implements UserMapper {
     /**
      * if a user is already registered, return true.
      */
-    public User findUser(String userName) {
+    public User findUserByName(String userName) {
         try(MongoClient mongoClient = AccessDB.connectToDB()){
             MongoDatabase database = mongoClient.getDatabase("BugReportApplication");
             Document user = database.getCollection("users").find(new Document("userName", userName)).first();
+            if (user == null) return null;
+            return new User(user.getString("userName"), user.getString("email"), user.getString("password"));
+        }
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        try(MongoClient mongoClient = AccessDB.connectToDB()){
+            MongoDatabase database = mongoClient.getDatabase("BugReportApplication");
+            Document user = database.getCollection("users").find(new Document("email", email)).first();
             if (user == null) return null;
             return new User(user.getString("userName"), user.getString("email"), user.getString("password"));
         }
@@ -27,7 +37,6 @@ public class UserMapperIml implements UserMapper {
     public Boolean addUser(String userName, String password, String email) {
         try(MongoClient mongoClient = AccessDB.connectToDB()){
             MongoDatabase database = mongoClient.getDatabase("BugReportApplication");
-            if (findUser(userName) != null) return false;
             database.getCollection("users").insertOne(new User(userName, email, password).toDocument());
         }
         return true;
@@ -37,7 +46,7 @@ public class UserMapperIml implements UserMapper {
     public Boolean deleteUser(String userName) {
         try(MongoClient mongoClient = AccessDB.connectToDB()){
             MongoDatabase database = mongoClient.getDatabase("BugReportApplication");
-            if (findUser(userName) == null) return false;
+            if (findUserByName(userName) == null) return false;
             database.getCollection("users").deleteOne(new Document("userName", userName));
         }
         return true;
