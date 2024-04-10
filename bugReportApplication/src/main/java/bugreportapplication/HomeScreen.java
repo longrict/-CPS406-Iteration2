@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package bugreportapplication;
+import bugreportapplication.Service.ServiceIml.UserServiceIml;
 
 /**
  *
@@ -26,23 +27,20 @@ public class HomeScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel = new javax.swing.JPanel();
-        title = new javax.swing.JLabel();
-        logo = new javax.swing.JLabel();
-        scrollpanel1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         programDesc = new javax.swing.JTextArea();
         getStartedBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel.setPreferredSize(new java.awt.Dimension(400, 500));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("Bug Report System (BRS)");
 
-        title.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        title.setText("Bug Report System (BRS)");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon.png"))); // NOI18N
 
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon.png"))); // NOI18N
-
-        programDesc.setEditable(false);
+        programDesc.setBackground(new java.awt.Color(242, 242, 242));
         programDesc.setColumns(20);
         programDesc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         programDesc.setLineWrap(true);
@@ -50,7 +48,6 @@ public class HomeScreen extends javax.swing.JFrame {
         programDesc.setText("The Bug Report System (BRS) intends to help the user keep track of bugs in their own programs. In order to get started, click the button below and login with with a valid username or password to get accessed to the bug report form.");
         programDesc.setWrapStyleWord(true);
         programDesc.setBorder(null);
-        scrollpanel1.setViewportView(programDesc);
 
         getStartedBtn.setText("Get Started");
         getStartedBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -59,51 +56,49 @@ public class HomeScreen extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
-        panel.setLayout(panelLayout);
-        panelLayout.setHorizontalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLayout.createSequentialGroup()
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(logo)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(scrollpanel1)
-                            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(getStartedBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(programDesc)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(getStartedBtn)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
-        panelLayout.setVerticalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLayout.createSequentialGroup()
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(logo))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(title)))
-                .addGap(22, 22, 22)
-                .addComponent(scrollpanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(getStartedBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(programDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(getStartedBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -113,6 +108,7 @@ public class HomeScreen extends javax.swing.JFrame {
         dispose();
         Login frame = new Login();
         frame.setVisible(true);
+        
     }//GEN-LAST:event_getStartedBtnActionPerformed
 
     /**
@@ -155,10 +151,9 @@ public class HomeScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton getStartedBtn;
-    private javax.swing.JLabel logo;
-    private javax.swing.JPanel panel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextArea programDesc;
-    private javax.swing.JScrollPane scrollpanel1;
-    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
