@@ -6,6 +6,7 @@ package bugreportapplication;
 import bugreportapplication.authorization.registerAuthorization;
 import bugreportapplication.DTO.Result;
 import bugreportapplication.Service.ServiceIml.UserServiceIml;
+import java.awt.Color;
 
 /**
  *
@@ -172,6 +173,7 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_moveLoginButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        warningMessage.setForeground(new java.awt.Color(255, 51, 51));
         // If password is not valid 
         if (!registerAuthorization.checkPassword(checkPass.getPassword())){
             warningMessage.setText("ERROR: Password must be 8 characters or longer and contain a capital letter.");
@@ -191,11 +193,11 @@ public class Register extends javax.swing.JFrame {
             // Displays message indicating of result
             if (results.getSuccess()) {
                 // change color to green and then back to red (if more users later)
-                warningMessage.setForeground(new java.awt.Color(102,255,102));
+                warningMessage.setForeground(new Color(0,204,51));
                 warningMessage.setText(results.getMsg());
-                warningMessage.setForeground(new java.awt.Color(255, 51, 51));
             // else, return error message
             } else {
+                warningMessage.setForeground(new java.awt.Color(255, 51, 51));
                 warningMessage.setText("ERROR: " + results.getMsg());
             }
         }

@@ -4,6 +4,7 @@
  */
 package bugreportapplication;
 import bugreportapplication.model.BugReport;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
@@ -18,21 +19,19 @@ public class bugReportInitial extends javax.swing.JFrame {
      */
     
     private final ArrayList<BugReport> bugs;
+    private final DefaultListModel<String> model;
     
     public bugReportInitial() {
         initComponents();
         // manually add all bugs in the database
         bugs = AccessDB.getReports();
-        DefaultListModel<String> model = new DefaultListModel<>();
+        model = new DefaultListModel<>();
                 
         for (BugReport bug : bugs) {
             model.addElement(bug.getTitle());
         }
-        System.out.println(bugs);
-        this.bugsList.setModel(model);
         
-        // view button initially off
-        viewBtn.setVisible(false);
+        this.bugsList.setModel(model);
                 
         // Set frame to be visible
         this.setVisible(true);
@@ -53,10 +52,11 @@ public class bugReportInitial extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         viewBtn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        removeBtn = new javax.swing.JButton();
         createBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         bugsList = new javax.swing.JList<>();
+        userMsg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,10 +77,10 @@ public class bugReportInitial extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Remove");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        removeBtn.setText("Remove");
+        removeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                removeBtnActionPerformed(evt);
             }
         });
 
@@ -98,6 +98,8 @@ public class bugReportInitial extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(bugsList);
+
+        userMsg.setForeground(new java.awt.Color(0, 204, 51));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,11 +120,12 @@ public class bugReportInitial extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(userMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(removeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(45, 45, 45))
         );
         jPanel1Layout.setVerticalGroup(
@@ -135,14 +138,16 @@ public class bugReportInitial extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(removeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -166,15 +171,39 @@ public class bugReportInitial extends javax.swing.JFrame {
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         // when viewBtn is clicked -> open up details about the bug itself
-        dispose();
-        bugReportView frame = new bugReportView(bugs.get(bugsList.getSelectedIndex()));
-        frame.setVisible(true);
+        // if not selected then inform user to select button, otherwise you can do it 
+        if (bugsList.getSelectedIndex() == -1) {
+            userMsg.setForeground(Color.red);
+            userMsg.setText("Select a bug before clicking the button");
+        } else {
+            dispose();
+            bugReportView frame = new bugReportView(bugs.get(bugsList.getSelectedIndex()));
+            frame.setVisible(true);
+        }
         
     }//GEN-LAST:event_viewBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void removeBugDB(BugReport bug) {
+        AccessDB.deleteReport(bug.getTitle(), bug.getDesc(), bug.getPriority());
+    }
+    
+    private void removeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBtnActionPerformed
+        // Remove a bug first in local arrayList
+        if (bugsList.getSelectedIndex() == -1) {
+            userMsg.setForeground(Color.red);
+            userMsg.setText("Select a bug before clicking the button");
+        } else {
+            // Remove element from list and update
+            BugReport removed = bugs.remove(bugsList.getSelectedIndex());
+            removeBugDB(removed);
+            model.removeElement(removed.getTitle());
+            this.bugsList.setModel(model);
+            userMsg.setForeground(new Color(0,204,51));
+            userMsg.setText(removed.getTitle() + " has been successfully removed.");
+            
+            
+        }
+    }//GEN-LAST:event_removeBtnActionPerformed
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         dispose();
@@ -224,12 +253,13 @@ public class bugReportInitial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> bugsList;
     private javax.swing.JButton createBtn;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton removeBtn;
+    private javax.swing.JLabel userMsg;
     private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }

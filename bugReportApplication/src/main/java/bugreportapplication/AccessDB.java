@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class AccessDB {
     public static MongoClient connectToDB(){
-        String apiKey = "group:qt1TK6adRt8TMTED";
+        String apiKey = System.getenv("API_KEY");
         String uri = "mongodb+srv://"+apiKey+"@cps406bugreportapplicat.gncu5jz.mongodb.net/?retryWrites=true&w=majority&appName=CPS406BugReportApplication";
         return MongoClients.create(uri);
     }
