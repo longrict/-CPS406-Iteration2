@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package bugreportapplication;
-import com.mongodb.client.MongoCollection;
+import bugreportapplication.model.BugReport;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -16,6 +18,19 @@ public class bugReportInitial extends javax.swing.JFrame {
      */
     public bugReportInitial() {
         initComponents();
+        // manually add all bugs in the database
+        ArrayList<BugReport> bugs = AccessDB.getReports();
+        DefaultListModel<String> model = new DefaultListModel<>();
+                
+        for (BugReport bug : bugs) {
+            model.addElement(bug.getTitle());
+        }
+        System.out.println(bugs);
+        this.bugsList.setModel(model);
+                
+        // Set frame to be visible
+        this.setVisible(true);
+        
     }
 
     /**
@@ -35,7 +50,7 @@ public class bugReportInitial extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         createBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        bugsList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,13 +85,8 @@ public class bugReportInitial extends javax.swing.JFrame {
             }
         });
 
-        jList1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Bug item 1", "Bug item 2", "Bug item 3", "Bug item 4", "Bug item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        bugsList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jScrollPane1.setViewportView(bugsList);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -187,24 +197,20 @@ public class bugReportInitial extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            public void run() {    
                 new bugReportInitial().setVisible(true);
-                
-                System.out.println("NOW RUNNING\n\n");
-                // manually add all bugs in the database
-                System.out.println(AccessDB.getReports());
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> bugsList;
     private javax.swing.JButton createBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

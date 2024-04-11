@@ -40,6 +40,11 @@ public class BugReport {
         this.priority = PriorityEnum.valueOf(priority);
         this.status = status;
     }
+    
+    // getter for name
+    public String getTitle() {
+        return title;
+    }
 
     @NonNull
     private String status;
