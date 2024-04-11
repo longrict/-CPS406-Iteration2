@@ -36,7 +36,7 @@ public class BugReport {
         this.title = "Title Template";
         this.description = "Desc Template";
         this.priority = PriorityEnum.High;
-        this.status = "Not fixed";
+        this.status = "Unresolved";
     }
     
     public BugReport(String title, String description, String priority, String status) {

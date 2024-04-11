@@ -28,7 +28,7 @@ public class AccessDB {
 
             Document report = new Document("title", title).append("description", Description)
                     .append("priority", BugReport.PriorityEnum.valueOf(Priority))
-                    .append("status", "Not fixed");
+                    .append("status", "Unresolved");
 
             collection.insertOne(report);
         }
