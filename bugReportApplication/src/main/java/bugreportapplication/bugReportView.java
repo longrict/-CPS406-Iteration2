@@ -15,8 +15,18 @@ public class bugReportView extends javax.swing.JFrame {
      * Creates new form bugReportView
      * @param bug
      */
+    
+    private final BugReport bug;
+    
     public bugReportView(BugReport bug) {
         initComponents();
+        
+        this.bug = bug;
+        
+        // If the status of the bug is already resolved, disable resolved button
+        if (bug.getStatus().equals("Resolved")) {
+            resolveBugBtn.setEnabled(false);
+        }
         
         // ensure that desc isn't writeable
         bugDesc.setFocusable(false);
@@ -46,6 +56,8 @@ public class bugReportView extends javax.swing.JFrame {
         bugPriority = new javax.swing.JLabel();
         bugStatus = new javax.swing.JLabel();
         returnBtn = new javax.swing.JButton();
+        resolveBugBtn = new javax.swing.JButton();
+        resolvedMsg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,24 +87,36 @@ public class bugReportView extends javax.swing.JFrame {
             }
         });
 
+        resolveBugBtn.setBackground(new java.awt.Color(204, 204, 204));
+        resolveBugBtn.setText("Resolve");
+        resolveBugBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resolveBugBtnActionPerformed(evt);
+            }
+        });
+
+        resolvedMsg.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        resolvedMsg.setForeground(new java.awt.Color(51, 204, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
-                            .addComponent(bugName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(bugPriority, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bugStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(resolvedMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(resolveBugBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(scrollPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                        .addComponent(bugName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(bugPriority, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(bugStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -106,9 +130,13 @@ public class bugReportView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(bugPriority, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(bugStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(18, 18, 18)
+                .addComponent(resolvedMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resolveBugBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,6 +158,16 @@ public class bugReportView extends javax.swing.JFrame {
         bugReportInitial frame = new bugReportInitial();
         frame.setVisible(true);
     }//GEN-LAST:event_returnBtnActionPerformed
+
+    private void resolveBugBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resolveBugBtnActionPerformed
+        AccessDB.resolveReport(bug.getTitle(), bug.getDesc(), bug.getPriority());
+        
+        // Now moved to resolve so disable the button
+        resolveBugBtn.setEnabled(false);
+        bugStatus.setText("Status: Resolved");
+        resolvedMsg.setText("Bug has successfully been resolved");
+        
+    }//GEN-LAST:event_resolveBugBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +210,8 @@ public class bugReportView extends javax.swing.JFrame {
     private javax.swing.JLabel bugPriority;
     private javax.swing.JLabel bugStatus;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton resolveBugBtn;
+    private javax.swing.JLabel resolvedMsg;
     private javax.swing.JButton returnBtn;
     private javax.swing.JScrollPane scrollPanel;
     // End of variables declaration//GEN-END:variables

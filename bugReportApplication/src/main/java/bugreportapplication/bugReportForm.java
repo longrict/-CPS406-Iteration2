@@ -4,7 +4,9 @@
  */
 package bugreportapplication;
 
+import bugreportapplication.model.BugReport;
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,7 +17,11 @@ public class bugReportForm extends javax.swing.JFrame {
     /**
      * Creates new form bugReportForm
      */
-    public bugReportForm() {
+    
+    private ArrayList<BugReport> bugs;
+    
+    public bugReportForm(ArrayList<BugReport> bugs) {
+        this.bugs = bugs;
         initComponents();
     }
 
@@ -78,7 +84,9 @@ public class bugReportForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(errorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(errorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -152,22 +160,36 @@ public class bugReportForm extends javax.swing.JFrame {
         if (title.equals("") || priority.equals("") || description.equals("")) {
             errorMsg.setForeground(Color.red);
             errorMsg.setText("Please make sure you have a title, description, and you select a priority.");
-        // Else 
+        // Else, check for one more error (if bug already exists with that name) and then create the bug
         } else {
-            // Add it to the database
-            AccessDB.createReport(title, description, priority);
-
-            // Return to the initial bug report GUI
-            dispose();
-            bugReportInitial bugs = new bugReportInitial();
-            bugs.setVisible(true);
+            // Check if bug already exists in DB
+            boolean bugExist = false;
+            for (BugReport bug : bugs) {
+                if (bug.getTitle().equals(title)) {
+                    bugExist = true;
+                    break;
+                }
+            }
+            
+            if (bugExist) {
+                // Display error message
+                errorMsg.setForeground(Color.red);
+                errorMsg.setText("Bug with the name '" + title + "' already exists.");
+            } else {
+                // Add it to the database
+                AccessDB.createReport(title, description, priority);
+                // Return to the initial bug report GUI
+                dispose();
+                bugReportInitial frame = new bugReportInitial();
+                frame.setVisible(true);
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
-        bugReportInitial bugs = new bugReportInitial();
-        bugs.setVisible(true);
+        bugReportInitial frame = new bugReportInitial();
+        frame.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -201,7 +223,7 @@ public class bugReportForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new bugReportForm().setVisible(true);
+                new bugReportForm(new ArrayList<BugReport>()).setVisible(true);
             }
         });
     }

@@ -1,15 +1,16 @@
 package bugreportapplication;
 import static com.mongodb.client.model.Filters.eq;
 
-import bugreportapplication.model.BugReport;
-import org.bson.Document;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCursor;
+import org.bson.Document;
 import bugreportapplication.model.BugReport;
+import com.mongodb.client.model.Updates;
 import java.util.ArrayList;
+import org.bson.conversions.Bson;
 /**
  *
  * @author 
@@ -47,6 +48,17 @@ public class AccessDB {
             Document report = new Document("title",title).append("description",description).append("priority",priority);
             collection.deleteOne(report);
             mongoClient.close();
+        }
+    }
+    
+    public static void resolveReport(String title, String description, String priority) {
+        try (MongoClient mongoClient = connectToDB()) {
+            MongoDatabase database = mongoClient.getDatabase("BugReportApplication");
+            MongoCollection<Document> collection = database.getCollection("BugReports");
+            Document report = new Document("title", title).append("description", description)
+                    .append("priority", BugReport.PriorityEnum.valueOf(priority)).append("status", "Unresolved");
+            Bson updates = Updates.combine(Updates.set("status", "Resolved"));
+            collection.updateOne(report, updates);
         }
     }
     
