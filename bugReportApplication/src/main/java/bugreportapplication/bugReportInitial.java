@@ -5,6 +5,9 @@
 package bugreportapplication;
 import bugreportapplication.model.BugReport;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
@@ -44,6 +47,28 @@ public class bugReportInitial extends javax.swing.JFrame {
         
         this.unresolvedBugs.setModel(unresolvedModel);
         this.resolvedBugs.setModel(resolvedModel);
+        
+        
+        MouseListener mouseListenerResolved = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int pos = resolvedBugs.locationToIndex(e.getPoint());
+                resolvedBugs.setSelectedIndex(pos);
+            }
+        };
+    
+        MouseListener mouseListenerUnresolved = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int pos = unresolvedBugs.locationToIndex(e.getPoint());
+                unresolvedBugs.setSelectedIndex(pos);
+            }
+        };
+    
+    
+    resolvedBugs.addMouseListener(mouseListenerResolved);
+    unresolvedBugs.addMouseListener(mouseListenerUnresolved);
+        
                 
         // Set frame to be visible
         this.setVisible(true);
@@ -176,10 +201,13 @@ public class bugReportInitial extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(28, 28, 28)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(28, 28, 28)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -303,10 +331,13 @@ public class bugReportInitial extends javax.swing.JFrame {
         screen.setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
+    
+    
     private void unresolvedBugsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_unresolvedBugsValueChanged
         // Error message gone now selected and other jlist is deselected
             userMsg.setText("");
             resolvedBugs.clearSelection();
+            
     }//GEN-LAST:event_unresolvedBugsValueChanged
 
     private void resolvedBugsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resolvedBugsMouseClicked
