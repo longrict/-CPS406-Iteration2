@@ -17,8 +17,6 @@ import java.util.ArrayList;
  */
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 //might not be needed
 public class BugReport {
     @NonNull
@@ -33,7 +31,14 @@ public class BugReport {
         High,Low,Medium
     }
     
-    // Constructor
+    // Constructors
+    public BugReport() {
+        this.title = "Title Template";
+        this.description = "Desc Template";
+        this.priority = PriorityEnum.High;
+        this.status = "Not fixed";
+    }
+    
     public BugReport(String title, String description, String priority, String status) {
         this.title = title;
         this.description = description;
@@ -44,6 +49,18 @@ public class BugReport {
     // getter for name
     public String getTitle() {
         return title;
+    }
+    
+    public String getDesc() {
+        return description;
+    }
+    
+    public String getPriority() {
+        return priority.toString();
+    }
+    
+    public String getStatus() {
+        return status;
     }
 
     @NonNull
