@@ -26,6 +26,7 @@ public class bugReportGraph extends javax.swing.JFrame {
      */
     public bugReportGraph() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
         ArrayList<BugReport> bugs = AccessDB.getReports();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();

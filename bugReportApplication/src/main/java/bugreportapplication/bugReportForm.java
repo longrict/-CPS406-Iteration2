@@ -19,10 +19,32 @@ public class bugReportForm extends javax.swing.JFrame {
      */
     
     private ArrayList<BugReport> bugs;
+    private final boolean editMode;
+    private BugReport editedBug;
     
+    
+    // Constructor for creating 
     public bugReportForm(ArrayList<BugReport> bugs) {
         this.bugs = bugs;
+        editMode = false;
         initComponents();
+    }
+    
+    // Constructor for editing 
+    public bugReportForm(BugReport bug) {
+        this.editedBug = bug;
+        editMode = true;
+        initComponents();
+        
+        // update current title, desc, and priority
+        this.bugName.setText(bug.getTitle());
+        this.bugDesc.setText(bug.getDesc());
+        
+        switch (bug.getPriority()) {
+            case "High" -> this.bugPriority.setSelectedIndex(0);
+            case "Medium" -> this.bugPriority.setSelectedIndex(1);
+            default -> this.bugPriority.setSelectedIndex(2);
+        }
     }
 
     /**
@@ -36,13 +58,13 @@ public class bugReportForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        bugName = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        bugDesc = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        bugPriority = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
         errorMsg = new javax.swing.JLabel();
 
@@ -50,9 +72,9 @@ public class bugReportForm extends javax.swing.JFrame {
 
         jLabel1.setText("Title");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        bugDesc.setColumns(20);
+        bugDesc.setRows(5);
+        jScrollPane1.setViewportView(bugDesc);
 
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -63,12 +85,12 @@ public class bugReportForm extends javax.swing.JFrame {
 
         jLabel2.setText("Priority");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        bugPriority.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "High", "Medium", "Low" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(bugPriority);
 
         jButton2.setText("Return to Bugs ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +116,7 @@ public class bugReportForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2))
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                            .addComponent(bugName, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +132,7 @@ public class bugReportForm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bugName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,50 +162,58 @@ public class bugReportForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
 
-        // Get the text from the title text field
-        String title = jTextField1.getText();
-        
-        // Get the selected priority from the list
-        String priority = jList1.getSelectedValue();
-        
-        // if nothing is selected then set it to empty string
-        if (jList1.isSelectionEmpty()) {
-            priority = "";
-        }
-        
-        // Get the text from the description text area
-        String description = jTextArea1.getText();
-        
-        // if one of the fields are not full, then let user know
-        if (title.equals("") || priority.equals("") || description.equals("")) {
-            errorMsg.setForeground(Color.red);
-            errorMsg.setText("Please make sure you have a title, description, and you select a priority.");
-        // Else, check for one more error (if bug already exists with that name) and then create the bug
-        } else {
-            // Check if bug already exists in DB
-            boolean bugExist = false;
-            for (BugReport bug : bugs) {
-                if (bug.getTitle().equals(title)) {
-                    bugExist = true;
-                    break;
+        // If not edit mode - create new bug
+        if (!editMode) {
+            // Get the text from the title text field
+            String title = bugName.getText();
+
+            // Get the selected priority from the list
+            String priority = bugPriority.getSelectedValue();
+
+            // if nothing is selected then set it to empty string
+            if (bugPriority.isSelectionEmpty()) {
+                priority = "";
+            }
+
+            // Get the text from the description text area
+            String description = bugDesc.getText();
+
+            // if one of the fields are not full, then let user know
+            if (title.equals("") || priority.equals("") || description.equals("")) {
+                errorMsg.setForeground(Color.red);
+                errorMsg.setText("Please make sure you have a title, description, and you select a priority.");
+            // Else, check for one more error (if bug already exists with that name) and then create the bug
+            } else {
+                // Check if bug already exists in DB
+                boolean bugExist = false;
+                for (BugReport bug : bugs) {
+                    if (bug.getTitle().equals(title)) {
+                        bugExist = true;
+                        break;
+                    }
+                }
+
+                if (bugExist) {
+                        // Display error message
+                        errorMsg.setForeground(Color.red);
+                        errorMsg.setText("Bug with the name '" + title + "' already exists.");
+                } else {
+                    // Add it to the database
+                    AccessDB.createReport(title, description, priority);
                 }
             }
-            
-            if (bugExist) {
-                // Display error message
-                errorMsg.setForeground(Color.red);
-                errorMsg.setText("Bug with the name '" + title + "' already exists.");
-            } else {
-                // Add it to the database
-                AccessDB.createReport(title, description, priority);
-                // Return to the initial bug report GUI
-                dispose();
-                bugReportInitial frame = new bugReportInitial();
-                frame.setVisible(true);
-            }
+        // Else, edit mode - once submit button is clicked, update in database 
+        } else {
+            AccessDB.editReport(editedBug.getTitle(), editedBug.getDesc(), editedBug.getPriority(), 
+                    bugName.getText(), bugDesc.getText(), bugPriority.getSelectedValue());
         }
+        
+        // Return to the initial bug report GUI
+        dispose();
+        bugReportInitial frame = new bugReportInitial();
+        frame.setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -229,16 +259,16 @@ public class bugReportForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea bugDesc;
+    private javax.swing.JTextField bugName;
+    private javax.swing.JList<String> bugPriority;
     private javax.swing.JLabel errorMsg;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

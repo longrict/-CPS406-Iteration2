@@ -26,6 +26,7 @@ public class bugReportView extends javax.swing.JFrame {
         // If the status of the bug is already resolved, disable resolved button
         if (bug.getStatus().equals("Resolved")) {
             resolveBugBtn.setEnabled(false);
+            editBtn.setEnabled(false);
         }
         
         // ensure that desc isn't writeable
@@ -58,7 +59,7 @@ public class bugReportView extends javax.swing.JFrame {
         returnBtn = new javax.swing.JButton();
         resolveBugBtn = new javax.swing.JButton();
         resolvedMsg = new javax.swing.JLabel();
-        resolveBugBtn1 = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,11 +100,11 @@ public class bugReportView extends javax.swing.JFrame {
         resolvedMsg.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         resolvedMsg.setForeground(new java.awt.Color(51, 204, 0));
 
-        resolveBugBtn1.setBackground(new java.awt.Color(204, 204, 204));
-        resolveBugBtn1.setText("Edit");
-        resolveBugBtn1.addActionListener(new java.awt.event.ActionListener() {
+        editBtn.setBackground(new java.awt.Color(204, 204, 204));
+        editBtn.setText("Edit");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resolveBugBtn1ActionPerformed(evt);
+                editBtnActionPerformed(evt);
             }
         });
 
@@ -116,7 +117,7 @@ public class bugReportView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(resolvedMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(resolveBugBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(resolveBugBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -147,7 +148,7 @@ public class bugReportView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(returnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(resolveBugBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(resolveBugBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -181,9 +182,11 @@ public class bugReportView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_resolveBugBtnActionPerformed
 
-    private void resolveBugBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resolveBugBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_resolveBugBtn1ActionPerformed
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        dispose();
+        bugReportForm screen = new bugReportForm(bug);
+        screen.setVisible(true);
+    }//GEN-LAST:event_editBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,9 +228,9 @@ public class bugReportView extends javax.swing.JFrame {
     private javax.swing.JLabel bugName;
     private javax.swing.JLabel bugPriority;
     private javax.swing.JLabel bugStatus;
+    private javax.swing.JButton editBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton resolveBugBtn;
-    private javax.swing.JButton resolveBugBtn1;
     private javax.swing.JLabel resolvedMsg;
     private javax.swing.JButton returnBtn;
     private javax.swing.JScrollPane scrollPanel;
