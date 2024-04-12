@@ -99,6 +99,7 @@ public class bugReportInitial extends javax.swing.JFrame {
         resolvedBugs = new javax.swing.JList<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        sprintGraphBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -178,6 +179,13 @@ public class bugReportInitial extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Unresolved Bugs");
 
+        sprintGraphBtn.setText("Sprint Graph");
+        sprintGraphBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sprintGraphBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -214,6 +222,8 @@ public class bugReportInitial extends javax.swing.JFrame {
                                 .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(removeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sprintGraphBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(19, 19, 19)))))
@@ -247,7 +257,8 @@ public class bugReportInitial extends javax.swing.JFrame {
                     .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(removeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sprintGraphBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -351,6 +362,11 @@ public class bugReportInitial extends javax.swing.JFrame {
         unresolvedBugs.clearSelection();
     }//GEN-LAST:event_resolvedBugsValueChanged
 
+    private void sprintGraphBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sprintGraphBtnActionPerformed
+        bugReportGraph screen = new bugReportGraph();
+        screen.setVisible(true);
+    }//GEN-LAST:event_sprintGraphBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -399,6 +415,7 @@ public class bugReportInitial extends javax.swing.JFrame {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton removeBtn;
     private javax.swing.JList<String> resolvedBugs;
+    private javax.swing.JButton sprintGraphBtn;
     private javax.swing.JList<String> unresolvedBugs;
     private javax.swing.JLabel userMsg;
     private javax.swing.JButton viewBtn;
