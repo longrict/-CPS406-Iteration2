@@ -14,6 +14,10 @@ import bugreportapplication.model.BugReport;
 import com.mongodb.client.model.Updates;
 import java.util.ArrayList;
 import org.bson.conversions.Bson;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 /**
  *
  * @author 
@@ -29,10 +33,17 @@ public class AccessDB {
         try(MongoClient mongoClient = connectToDB()){
             MongoDatabase database = mongoClient.getDatabase("BugReportApplication");
             MongoCollection<Document> collection = database.getCollection("BugReports");
-
+            
+            ZonedDateTime easternDateTime = ZonedDateTime.now(ZoneId.of("America/Toronto"));
+            
+            // date in form YYYY-MM-DD
+            String formattedDate = easternDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
+            
+            
             Document report = new Document("title", title).append("description", Description)
                     .append("priority", BugReport.PriorityEnum.valueOf(Priority))
-                    .append("status", "Unresolved");
+                    .append("status", "Unresolved")
+                    .append("date",formattedDate);
 
             collection.insertOne(report);
         }
@@ -100,7 +111,8 @@ public class AccessDB {
                 String desc = document.getString("description");
                 String priority = document.getString("priority");
                 String status = document.getString("status");
-                BugReport bug = new BugReport(title, desc, priority, status);
+                String date = document.getString("date");
+                BugReport bug = new BugReport(title, desc, priority, status,date);
                 reports.add(bug);
             }
             
