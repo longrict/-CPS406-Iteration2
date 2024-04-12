@@ -2,6 +2,7 @@ package bugreportapplication;
 import static com.mongodb.client.model.Filters.eq;
 
 import bugreportapplication.model.BugReport;
+import bugreportapplication.model.User;
 import org.bson.Document;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -47,6 +48,25 @@ public class AccessDB {
             Document report = new Document("title",title).append("description",description).append("priority",priority);
             collection.deleteOne(report);
             mongoClient.close();
+        }
+    }
+
+    public void notifyUsers(String subjectLine,String message) {
+        try(MongoClient mongoClient = connectToDB()){
+            MongoDatabase database = mongoClient.getDatabase("BugReportApplication");
+            MongoCollection<Document> collection = database.getCollection("users");
+            // Find all documents in the collection
+            try (MongoCursor<Document> cursor = collection.find().iterator()) {
+                ArrayList<String> userEmails = new ArrayList<>();
+                while (cursor.hasNext()) {
+                    Document user = cursor.next();
+                    // Process each document here
+                    userEmails.add(user.getString("email"));
+                }
+                for (String userEmail : userEmails) {
+                    SendEmailTLS.send(userEmail, subjectLine, message);
+                }
+            }
         }
     }
     
