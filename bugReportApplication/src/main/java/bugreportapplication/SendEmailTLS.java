@@ -9,7 +9,7 @@ public class SendEmailTLS {
 
 
     public static void send(String email,String subjectLine,String emailMessage) {
-        final String username = "xaviertaowang@gmail.com";
+        final String username = "cps420group33@gmail.com";
         final String password = null;//TODO replace the password
 
         Properties prop = new Properties();
@@ -28,7 +28,7 @@ public class SendEmailTLS {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("xaviertaowang@gmail.com"));
+            message.setFrom(new InternetAddress("cps420group33@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse(email)
