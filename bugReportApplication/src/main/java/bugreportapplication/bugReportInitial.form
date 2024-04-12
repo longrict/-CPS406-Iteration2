@@ -83,6 +83,8 @@
                                   <Component id="createBtn" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="removeBtn" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="sprintGraphBtn" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="logoutBtn" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -128,6 +130,7 @@
                       <Component id="removeBtn" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="logoutBtn" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="viewBtn" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="sprintGraphBtn" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
@@ -268,6 +271,14 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Unresolved Bugs"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="sprintGraphBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sprint Graph"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sprintGraphBtnActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
