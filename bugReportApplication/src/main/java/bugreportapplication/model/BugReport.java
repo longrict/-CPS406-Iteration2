@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package bugreportapplication.model;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +30,8 @@ public class BugReport {
 
     @NonNull
     private PriorityEnum priority;
+    private String date;
+    
     public enum PriorityEnum {
         High,Low,Medium
     }
@@ -37,13 +42,19 @@ public class BugReport {
         this.description = "Desc Template";
         this.priority = PriorityEnum.High;
         this.status = "Unresolved";
+        
+        //temp string
+        ZonedDateTime easternDateTime = ZonedDateTime.now(ZoneId.of("America/Toronto"));
+        this.date = easternDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
+            
     }
     
-    public BugReport(String title, String description, String priority, String status) {
+    public BugReport(String title, String description, String priority, String status,String date) {
         this.title = title;
         this.description = description;
         this.priority = PriorityEnum.valueOf(priority);
         this.status = status;
+        this.date = date;
     }
     
     // getter for name
