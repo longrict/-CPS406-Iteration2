@@ -17,12 +17,14 @@ import java.util.ArrayList;
 import org.jfree.chart.plot.CategoryPlot;
 /**
  *
- * @author 
+ * @author David Liu, Longric Tran, Refath Ahmed, Tao Wang, Vito Carnovale (Group #33)
+ *
+ * Represents a bugReportGraph class for creating graphs that display information about previous sprints
  */
 public class bugReportGraph extends javax.swing.JFrame {
 
     /**
-     * Creates new form bugReportGraph
+     * Creates new form bugReportGraph; uses current date as the cutoff
      */
     public bugReportGraph() {
         initComponents();
@@ -32,12 +34,13 @@ public class bugReportGraph extends javax.swing.JFrame {
         int resolved_count = 0;
         int unresolved_count = 0;
         
-        // get current date
+        // get current date in the form YYYY-MM-DD
         ZonedDateTime easternDateTime = ZonedDateTime.now(ZoneId.of("America/Toronto"));
         String formattedDate = easternDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate current_date = LocalDate.parse(formattedDate, formatter);
-        
+
+        // get count of unresolved and resolved bugs before current date
         for (BugReport bug : bugs){
             LocalDate report_date = LocalDate.parse(bug.getDate(),formatter);
             if (report_date.isBefore(current_date)){
@@ -52,7 +55,7 @@ public class bugReportGraph extends javax.swing.JFrame {
         dataset.addValue(unresolved_count, "Series 1", "Unresolved");
         dataset.addValue(resolved_count, "Series 1", "Resolved");
 
-        // Create a chart
+        // Create a chart with counts of unresolved and resolved bugs
         JFreeChart chart = ChartFactory.createBarChart(
                 "Bug Reports Before "+current_date.toString(),
                 "Category",
@@ -77,7 +80,10 @@ public class bugReportGraph extends javax.swing.JFrame {
         setContentPane(chartPanel);
 
         }
-    
+
+        /**
+         * Creates new form bugReportGraph; uses specified date as the cutoff
+         */
         public bugReportGraph(String date) {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -89,7 +95,8 @@ public class bugReportGraph extends javax.swing.JFrame {
         // convert string date to LocalDate
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate current_date = LocalDate.parse(date, formatter);
-        
+
+        // get count of unresolved and resolved bugs before current date
         for (BugReport bug : bugs){
             LocalDate report_date = LocalDate.parse(bug.getDate(),formatter);
             if (report_date.isBefore(current_date)){
@@ -104,7 +111,7 @@ public class bugReportGraph extends javax.swing.JFrame {
         dataset.addValue(unresolved_count, "Series 1", "Unresolved");
         dataset.addValue(resolved_count, "Series 1", "Resolved");
 
-        // Create a chart
+        // Create a chart with counts of unresolved and resolved bugs
         JFreeChart chart = ChartFactory.createBarChart(
                 "Bug Reports Before "+date,
                 "Category",
