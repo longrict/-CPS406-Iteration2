@@ -363,7 +363,7 @@ public class bugReportInitial extends javax.swing.JFrame {
     }//GEN-LAST:event_resolvedBugsValueChanged
 
     private void sprintGraphBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sprintGraphBtnActionPerformed
-        bugReportGraph screen = new bugReportGraph();
+        sprintDateForm screen = new sprintDateForm();
         screen.setVisible(true);
     }//GEN-LAST:event_sprintGraphBtnActionPerformed
 

@@ -1,17 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package bugreportapplication;
 
 /**
  *
- * @author David
+ * @author David Liu, Longric Tran, Refath Ahmed, Tao Wang, Vito Carnovale (Group #33)
+ *
+ * Represents a Logout class for displaying the logout screen
  */
 public class Logout extends javax.swing.JFrame {
 
     /**
-     * Creates new form logout
+     * Creates new logout form 
      */
     public Logout() {
         initComponents();
