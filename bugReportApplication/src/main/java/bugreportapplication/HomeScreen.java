@@ -7,7 +7,9 @@ import bugreportapplication.Service.ServiceIml.UserServiceIml;
 
 /**
  *
- * @author David
+ * @author David Liu, Longric Tran, Refath Ahmed, Tao Wang, Vito Carnovale (Group #33)
+ *
+ * Represents a HomeScreen class to display a description of the application and lead into login and rest of the system
  */
 public class HomeScreen extends javax.swing.JFrame {
 
@@ -106,6 +108,10 @@ public class HomeScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *
+     * handles the get started button interaction; spawns login frame
+     */
     private void getStartedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getStartedBtnActionPerformed
         dispose();
         Login frame = new Login();
