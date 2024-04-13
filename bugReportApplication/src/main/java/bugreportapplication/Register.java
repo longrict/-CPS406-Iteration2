@@ -1,13 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package bugreportapplication;
 import bugreportapplication.authorization.registerAuthorization;
 import bugreportapplication.DTO.Result;
 import bugreportapplication.Service.ServiceIml.UserServiceIml;
 import java.awt.Color;
 
+/**
+ *
+ * @author David Liu, Longric Tran, Refath Ahmed, Tao Wang, Vito Carnovale (Group #33)
+ *
+ * Represents a Register class to handle registering users
+ */
 
 public class Register extends javax.swing.JFrame {
 
