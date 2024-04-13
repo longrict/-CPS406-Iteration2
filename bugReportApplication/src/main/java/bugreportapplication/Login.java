@@ -5,10 +5,7 @@
 package bugreportapplication;
 import bugreportapplication.Service.ServiceIml.UserServiceIml;
 
-/**
- *
- * @author vito
- */
+// Allows user to login to the application
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -130,16 +127,26 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Moves from login frame to register frame
     private void moveRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveRegisterButtonActionPerformed
+        // Deletes current frame
         dispose();
+        // Initializes register frame
         Register reg = new Register();
         reg.setVisible(true);
     }//GEN-LAST:event_moveRegisterButtonActionPerformed
 
+    // Allows users to login to their account, checks if they have a valid account
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        // Take entered elements
         String user = logEnterUser.getText();
         String strPass = new String(logEnterPass.getPassword());
+        
+        // Create a database object to connect to the DB
         UserServiceIml check = new UserServiceIml();
+        
+        // Checks if the login information is valid, if it is proceed to the application
+        //  if it isn't send a warning
         if(check.login(user, strPass)){
             dispose();
             bugReportInitial rep = new bugReportInitial();

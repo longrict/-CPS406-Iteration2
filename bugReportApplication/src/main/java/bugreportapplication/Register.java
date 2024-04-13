@@ -8,10 +8,7 @@ import bugreportapplication.DTO.Result;
 import bugreportapplication.Service.ServiceIml.UserServiceIml;
 import java.awt.Color;
 
-/**
- *
- * @author vito
- */
+
 public class Register extends javax.swing.JFrame {
 
     /**
@@ -166,6 +163,7 @@ public class Register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Moves from register to login page
     private void moveLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveLoginButtonActionPerformed
         dispose();
         Login log = new Login();
