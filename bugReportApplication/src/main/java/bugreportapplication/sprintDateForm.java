@@ -14,6 +14,7 @@ public class sprintDateForm extends javax.swing.JFrame {
      */
     public sprintDateForm() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
