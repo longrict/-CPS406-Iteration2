@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package bugreportapplication;
 import java.time.YearMonth;
 
 /**
  *
- * @author David
+ * @author David Liu, Longric Tran, Refath Ahmed, Tao Wang, Vito Carnovale (Group #33)
+ *
+ * Represents a sprintDateForm class to prompt user for the start and end date for which bug statistics will be displayed
  */
 public class sprintDateForm extends javax.swing.JFrame {
 
@@ -163,6 +161,10 @@ public class sprintDateForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *
+     * handles user input, makes sure the date is valid and displays an error message if not
+     */
     private void getSprintGraphBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getSprintGraphBtnActionPerformed
         
         String day = dayInput.getText();
