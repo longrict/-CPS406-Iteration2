@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package bugreportapplication;
 import bugreportapplication.authorization.registerAuthorization;
 import bugreportapplication.DTO.Result;
@@ -10,8 +7,11 @@ import java.awt.Color;
 
 /**
  *
- * @author vito
+ * @author David Liu, Longric Tran, Refath Ahmed, Tao Wang, Vito Carnovale (Group #33)
+ *
+ * Represents a Register class to handle registering users
  */
+
 public class Register extends javax.swing.JFrame {
 
     /**
@@ -166,6 +166,7 @@ public class Register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Moves from register to login page
     private void moveLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveLoginButtonActionPerformed
         dispose();
         Login log = new Login();

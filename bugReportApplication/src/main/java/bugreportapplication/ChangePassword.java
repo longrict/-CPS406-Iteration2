@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package bugreportapplication;
 import bugreportapplication.Service.ServiceIml.UserServiceIml;
 import bugreportapplication.authorization.registerAuthorization;
@@ -9,7 +5,9 @@ import java.awt.Color;
 
 /**
  *
- * @author vito
+ * @author David Liu, Longric Tran, Refath Ahmed, Tao Wang, Vito Carnovale (Group #33)
+ *
+ * Represents an ChangePassword class to collect information from the user to change their account details
  */
 public class ChangePassword extends javax.swing.JFrame {
 

@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package bugreportapplication;
 import bugreportapplication.model.BugReport;
 
 /**
  *
- * @author David
+ * @author David Liu, Longric Tran, Refath Ahmed, Tao Wang, Vito Carnovale (Group #33)
+ *
+ * Represents a bugReportView class for displaying a more detailed look into a bug report
  */
 public class bugReportView extends javax.swing.JFrame {
 

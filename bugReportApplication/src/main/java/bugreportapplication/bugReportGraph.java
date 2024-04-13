@@ -82,9 +82,9 @@ public class bugReportGraph extends javax.swing.JFrame {
         }
 
         /**
-         * Creates new form bugReportGraph; uses specified date as the cutoff
+         * Creates new form bugReportGraph; uses specified date interval
          */
-        public bugReportGraph(String date) {
+        public bugReportGraph(String startDate, String endDate) {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         ArrayList<BugReport> bugs = AccessDB.getReports();
@@ -94,12 +94,14 @@ public class bugReportGraph extends javax.swing.JFrame {
         
         // convert string date to LocalDate
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate current_date = LocalDate.parse(date, formatter);
-
+        LocalDate start_date = LocalDate.parse(startDate, formatter);
+        LocalDate end_date = LocalDate.parse(endDate,formatter);
+        
         // get count of unresolved and resolved bugs before current date
         for (BugReport bug : bugs){
             LocalDate report_date = LocalDate.parse(bug.getDate(),formatter);
-            if (report_date.isBefore(current_date)){
+            if ((report_date.isBefore(end_date) && report_date.isAfter(start_date)) || 
+                    report_date.equals(end_date) || report_date.equals(start_date)){
                 if (bug.getStatus().equals("Unresolved")){
                     unresolved_count++;
                 }else{
@@ -113,7 +115,7 @@ public class bugReportGraph extends javax.swing.JFrame {
 
         // Create a chart with counts of unresolved and resolved bugs
         JFreeChart chart = ChartFactory.createBarChart(
-                "Bug Reports Before "+date,
+                "Bug Reports Between "+start_date+" and "+ end_date,
                 "Category",
                 "# Of Reports",
                 dataset,

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 @Data
 @RequiredArgsConstructor
+// Handles what a User is and functions related to the user object
 public class User {
     @NonNull
     private String userName;
