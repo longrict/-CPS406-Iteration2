@@ -46,6 +46,8 @@ public class AccessDB {
                     .append("date",formattedDate);
 
             collection.insertOne(report);
+            notifyUsers("BugReport: "+title+" has been opened!","A bug report named "+title+" has been opened.");
+            mongoClient.close();
         }
     }
     
@@ -61,11 +63,12 @@ public class AccessDB {
             MongoCollection<Document> collection = database.getCollection("BugReports");
             Document report = new Document("title",title).append("description",description).append("priority",priority);
             collection.deleteOne(report);
+            notifyUsers("BugReport: "+title+" has been deleted!","A bug report named "+title+" has been deleted");
             mongoClient.close();
         }
     }
 
-    public void notifyUsers(String subjectLine,String message) {
+    public static void notifyUsers(String subjectLine,String message) {
         try(MongoClient mongoClient = connectToDB()){
             MongoDatabase database = mongoClient.getDatabase("BugReportApplication");
             MongoCollection<Document> collection = database.getCollection("users");
@@ -81,6 +84,7 @@ public class AccessDB {
                     SendEmailTLS.send(userEmail, subjectLine, message);
                 }
             }
+            mongoClient.close();
         }
     }
     
@@ -92,6 +96,8 @@ public class AccessDB {
                     .append("priority", BugReport.PriorityEnum.valueOf(priority)).append("status", "Unresolved");
             Bson updates = Updates.combine(Updates.set("status", "Resolved"));
             collection.updateOne(report, updates);
+            notifyUsers("BugReport: "+title+" has been resolved!","A bug report named "+title+" has been resolved");
+            mongoClient.close();
         }
     }
     
@@ -115,7 +121,7 @@ public class AccessDB {
                 BugReport bug = new BugReport(title, desc, priority, status,date);
                 reports.add(bug);
             }
-            
+            mongoClient.close();
             return reports;
         } 
     }

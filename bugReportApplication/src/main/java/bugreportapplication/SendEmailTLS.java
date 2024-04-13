@@ -10,7 +10,7 @@ public class SendEmailTLS {
 
     public static void send(String email,String subjectLine,String emailMessage) {
         final String username = "cps420group33@gmail.com";
-        final String password = null;//TODO replace the password
+        final String password = null;
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
