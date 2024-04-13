@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package bugreportapplication;
 import bugreportapplication.model.BugReport;
 import java.awt.Color;
@@ -13,7 +9,9 @@ import javax.swing.DefaultListModel;
 
 /**
  *
- * @author David
+ * @author David Liu, Longric Tran, Refath Ahmed, Tao Wang, Vito Carnovale (Group #33)
+ *
+ * Represents a bugReportInitial class to display the lists of bug reports and other actions available to user
  */
 public class bugReportInitial extends javax.swing.JFrame {
 
