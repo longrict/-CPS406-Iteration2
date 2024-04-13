@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package bugreportapplication.authorization;
 
 /**
  *
- * @author vito
+ * @author David Liu, Longric Tran, Refath Ahmed, Tao Wang, Vito Carnovale (Group #33)
+ *
+ * Represents a loginAuthorization class to check if the user is in the database
  */
 public class loginAuthorization {
     
