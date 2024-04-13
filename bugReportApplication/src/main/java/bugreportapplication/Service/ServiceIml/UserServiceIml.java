@@ -30,4 +30,19 @@ public class UserServiceIml implements UserService {
         UserMapperIml userMapper = new UserMapperIml();
         return userMapper.deleteUser(userName);
     }
+    
+    public Boolean changePassword(String userName, String oldPassword, String newPassword) {
+        UserMapperIml userMapper = new UserMapperIml();
+        User user = userMapper.findUserByName(userName);
+        if (user != null) {
+            if (oldPassword.equals(user.getPassword())) {
+                delete(userName);
+                register(userName, newPassword, user.getEmail());
+                return true;
+            }
+            return false;
+        } else {
+            return false; 
+        }
+    }
 }

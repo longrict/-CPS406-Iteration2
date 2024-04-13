@@ -10,6 +10,7 @@ bugreportapplication\sprintDateForm.class
 bugreportapplication\bugReportInitial$8.class
 bugreportapplication\bugReportView$1.class
 bugreportapplication\bugReportView.class
+bugreportapplication\ChangePassword$3.class
 bugreportapplication\bugReportInitial$12.class
 bugreportapplication\Logout.class
 bugreportapplication\bugReportView$4.class
@@ -17,6 +18,8 @@ bugreportapplication\bugReportGraph$1.class
 bugreportapplication\bugReportGraph.class
 bugreportapplication\Logout$1.class
 bugreportapplication\Login$3.class
+bugreportapplication\ChangePassword$4.class
+bugreportapplication\bugReportInitial$13.class
 bugreportapplication\bugReportInitial$11.class
 bugreportapplication\bugReportInitial$7.class
 bugreportapplication\bugReportView$3.class
